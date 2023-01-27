@@ -16,11 +16,29 @@ const songSlice = createSlice({
   },
 });
 
+const movieSlice = createSlice({
+  name: "movie",
+  initialState: [],
+  reducers: {
+    addMovie: (state, action) => {
+      state.push(action.payload);
+    },
+    removeMovie: (state, action) => {
+      const index = state.indexOf(action.payload);
+      if (index !== -1) {
+        state.splice(index, 1);
+      }
+    },
+  },
+});
+
 const store = configureStore({
   reducer: {
+    movies: movieSlice.reducer,
     songs: songSlice.reducer,
   },
 });
 
 export { store };
 export const { addSong, removeSong } = songSlice.actions;
+export const { addMovie, removeMovie } = movieSlice.actions;
